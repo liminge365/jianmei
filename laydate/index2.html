@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      .wrap{
+          display: flex;
+          margin-top: 10px;
+      }
+      .setDate,
+      .setDate1,
+      .setDate2{
+          display: flex;
+          align-items: center;
+          margin-right: 5px;
+      }
+      .setDate .toggle,
+      .setDate1 .toggle,
+      .setDate2 .toggle{
+          border: 1px solid #ccc;
+          width: 80px;
+          border-radius: 5px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-left: 15px;
+          padding-right: 10px;
+          box-sizing: border-box;
+      }
+      .setDate .toggle .cont,
+      .setDate1 .toggle .cont,
+      .setDate2 .toggle .cont{
+          color: #646464;
+      }
+      .setDate .toggle .trigon b,
+      .setDate1 .toggle .trigon b,
+      .setDate2 .toggle .trigon b{
+          width:0;
+          height: 0;
+          border: 8px solid transparent;
+          display: block;
+      }
+      .setDate .toggle .trigon b.bottom,
+      .setDate1 .toggle .trigon b.bottom,
+      .setDate2 .toggle .trigon b.bottom{
+          border-bottom-color: #ADAEB0;
+          cursor: pointer;
+      }
+      .setDate .toggle .trigon b.bottom:hover,
+      .setDate1 .toggle .trigon b.bottom:hover,
+      .setDate2 .toggle .trigon b.bottom:hover{
+          border-bottom-color: #666;
+      }
+      .setDate .toggle .trigon b.top,
+      .setDate1 .toggle .trigon b.top,
+      .setDate2 .toggle .trigon b.top{
+          border-top-color: #ADAEB0;
+          margin-top: 3px;
+          cursor: pointer;
+      }
+      .setDate .toggle .trigon b.top:hover,
+      .setDate1 .toggle .trigon b.top:hover,
+      .setDate2 .toggle .trigon b.top:hover{
+          border-top-color: #ADAEB0;
+      }
+      .setDate .time,
+      .setDate1 .time,
+      .setDate2 .time{
+          padding-left: 8px;
+          color: #646464;
+      }
+    </style>
+</head>
+<body>
+    <div id='test-n1'></div>
+    <div class="wrap">
+        <div class="setDate">
+            <div class="toggle">
+                <span class='cont'>00</span>
+                <span class='trigon'><b class='bottom'></b><b class='top'></b></span>
+            </div>
+            <div class="time">时</div>
+        </div>
+        <div class="setDate1">
+            <div class="toggle">
+                <span class='cont'>00</span>
+                <span class='trigon'><b class='bottom'></b><b class='top'></b></span>
+            </div>
+            <div class="time">分</div>
+        </div>
+        <div class="setDate2">
+            <div class="toggle">
+                <span class='cont'>00</span>
+                <span class='trigon'><b class='bottom'></b><b class='top'></b></span>
+            </div>
+            <div class="time">秒</div>
+        </div>
+    </div>
+    <script src='./laydate/laydate.js'></script>
+    <script src='./jquery.min.js'></script>
+    <script>
+        laydate.render({
+            elem: '#test-n1',
+            position: 'static'
+        });
+        function fun(name,time){
+            var count = parseInt(name.find(".cont").text());
+            name.find('.bottom').click(function(){
+                count++;
+                if(count > time){
+                    count = 0;
+                }
+                count < 10 ? name.find(".cont").html('0' + count) : name.find(".cont").html(count);
+            })
+            name.find('.top').click(function(){
+                count--;
+                if(count < 0){
+                    count = time
+                }
+                count < 10 ? name.find(".cont").html('0' + count) : name.find(".cont").html(count);
+            })
+        }
+        fun($(".setDate"),23)
+        fun($(".setDate1"),59)
+        fun($(".setDate2"),59)
+    </script>
+</body>
+</html>
